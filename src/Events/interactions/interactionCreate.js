@@ -9,25 +9,24 @@ module.exports = {
    */
 
   execute(interaction, client) {
-    if (!interaction.isChatInputCommand()) return;
+    if (interaction.isChatInputCommand()) {
+      const command = client.commands.get(interaction.commandName);
 
-    const command = client.commands.get(interaction.commandName);
+      if (!command) {
+        interaction.reply({ content: "outdated command" });
+      }
 
-    if (!command) {
-      interaction.reply({
-        content: "This command doesn't exist!",
-        ephemeral: true,
-      });
-    }
-
-    try {
       command.execute(interaction, client);
-    } catch (error) {
-      console.error(error);
-      interaction.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
+    } else if (interaction.isButton()) {
+      const role = interaction.guild.roles.cache.get("1083474591025999953");
+      return interaction.member.roles.add(role).then(member =>
+        interaction.reply({
+          content: `${role} has been assigned to you.`,
+          ephemeral: true,
+        })
+      );
+    } else {
+      return;
     }
   },
 };
