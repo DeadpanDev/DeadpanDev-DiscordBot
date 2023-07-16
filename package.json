@@ -5,7 +5,7 @@
   "main": "src/core.js",
   "scripts": {
     "start": "node src/core.js",
-    "test": "nodemon src/core.js"
+    "dev": "nodemon src/core.js"
   },
   "keywords": [
     "Discord"
@@ -13,6 +13,7 @@
   "author": "DeadpanDev",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/builders": "^1.6.3",
     "ascii-table": "^0.0.9",
     "discord.js": "^14.11.0",
     "fs": "^0.0.1-security",
