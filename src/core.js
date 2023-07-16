@@ -3,6 +3,7 @@ const {
   GatewayIntentBits,
   Partials,
   Collection,
+  CommandInteraction,
 } = require("discord.js");
 
 const { Guilds, GuildMembers, GuildMessages } = GatewayIntentBits;

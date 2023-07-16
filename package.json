@@ -4,7 +4,8 @@
   "description": "My Own Discord Bot",
   "main": "src/core.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/core.js",
+    "test": "nodemon src/core.js"
   },
   "keywords": [
     "Discord"

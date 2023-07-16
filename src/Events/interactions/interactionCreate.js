@@ -1,17 +1,33 @@
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   name: "interactionCreate",
 
+  /**
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   */
+
   execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = interaction.client.commands.get(interaction.commandName);
+    const command = client.commands.get(interaction.commandName);
 
     if (!command) {
-      interaction.reply({ content: "An error has occurred.", ephemeral: true });
+      interaction.reply({
+        content: "This command doesn't exist!",
+        ephemeral: true,
+      });
     }
 
-    command.execute(interaction, client);
+    try {
+      command.execute(interaction, client);
+    } catch (error) {
+      console.error(error);
+      interaction.reply({
+        content: "There was an error while executing this command!",
+        ephemeral: true,
+      });
+    }
   },
 };
